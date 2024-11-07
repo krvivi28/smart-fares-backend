@@ -28,6 +28,8 @@ const userSchema = new mongoose.Schema({
     required: [true, "contact_number is requires"],
     unique: true,
   },
+  gst_number: String,
+  pan_numner: String,
   password: {
     type: String,
     required: [true, "Please enter your password"],
@@ -50,6 +52,7 @@ const userSchema = new mongoose.Schema({
     default: "user",
     enum: ["user", "admin", "agent", "customer", "super-admin"],
   },
+
   resetPasswordToken: String,
   resetPasswordExpire: Date,
 });

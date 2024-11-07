@@ -22,7 +22,7 @@ app.use(cors());
 app.use(express.static(path.resolve("backend", "public")));
 
 // configure routes
-app.use("/api/hodophilia/auth", userRoutes);
+app.use("/auth", userRoutes);
 
 // errorHandlerMiddleware
 app.use(errorHandlerMiddleware);
