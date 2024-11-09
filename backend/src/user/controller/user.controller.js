@@ -77,9 +77,7 @@ export const forgetPassword = async (req, res, next) => {
 
     await user.save({ validateBeforeSave: false });
 
-    const resetPasswordUrl = `${req.protocol}://${req.get(
-      "host"
-    )}/api/storefleet/user/password/reset/${resetToken}`;
+    const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
 
     try {
       await sendPasswordResetEmail(user, resetPasswordUrl);
