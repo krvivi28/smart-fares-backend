@@ -39,12 +39,10 @@ const userSchema = new mongoose.Schema({
     public_id: {
       type: String,
       required: true,
-      default: "1234567890",
     },
     url: {
       type: String,
       required: true,
-      default: "this is dummy avatar url",
     },
   },
   role: {
