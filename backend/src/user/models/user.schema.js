@@ -40,11 +40,11 @@ const userSchema = new mongoose.Schema({
   profileImg: {
     public_id: {
       type: String,
-      required: true,
+      // required: true,
     },
     url: {
       type: String,
-      required: true,
+      // required: true,
     },
   },
   document: {
