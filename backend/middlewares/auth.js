@@ -3,13 +3,33 @@ import { ErrorHandler } from "../utils/errorHandler.js";
 import UserModel from "../src/user/models/user.schema.js";
 
 export const auth = async (req, res, next) => {
-  const { token } = req.cookies;
-  if (!token) {
-    return next(new ErrorHandler(401, "login to access this route!"));
+  try {
+    const { token: cookieToken } = req.cookies;
+    const headerToken = req.headers.authorization?.split(" ")[1];
+    const token = cookieToken || headerToken;
+
+    if (!token) {
+      return next(new ErrorHandler(401, "Login to access this route!"));
+    }
+
+    const decodedData = jwt.verify(token, process.env.JWT_SECRET);
+    if (!decodedData || !decodedData.id) {
+      return next(new ErrorHandler(401, "Invalid token. Please login again."));
+    }
+
+    const user = await UserModel.findById(decodedData.id);
+    if (!user) {
+      return next(new ErrorHandler(404, "User not found."));
+    }
+    req.user = user;
+
+    next();
+  } catch (error) {
+    console.log(error);
+    return next(
+      new ErrorHandler(401, "Authentication failed. Please login again.")
+    );
   }
-  const decodedData = await jwt.verify(token, process.env.JWT_Secret);
-  req.user = await UserModel.findById(decodedData.id);
-  next();
 };
 
 export const authByUserRole = (...roles) => {

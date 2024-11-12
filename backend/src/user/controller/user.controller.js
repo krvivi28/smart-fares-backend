@@ -157,12 +157,11 @@ export const updatePassword = async (req, res, next) => {
 };
 
 export const updateUserProfile = async (req, res, next) => {
-  const { name, email } = req.body;
   try {
-    const updatedUserDetails = await updateUserProfileRepo(req.user._id, {
-      name,
-      email,
-    });
+    const updatedUserDetails = await updateUserProfileRepo(
+      req.user._id,
+      req.body
+    );
     res.status(201).json({ success: true, updatedUserDetails });
   } catch (error) {
     return next(new ErrorHandler(400, error));
