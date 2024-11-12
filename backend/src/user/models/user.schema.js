@@ -30,12 +30,24 @@ const userSchema = new mongoose.Schema({
   },
   gst_number: String,
   pan_numner: String,
+  address: String,
+  ref_by: String,
   password: {
     type: String,
     required: [true, "Please enter your password"],
     select: false,
   },
   profileImg: {
+    public_id: {
+      type: String,
+      required: true,
+    },
+    url: {
+      type: String,
+      required: true,
+    },
+  },
+  document: {
     public_id: {
       type: String,
       required: true,
