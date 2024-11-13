@@ -40,25 +40,17 @@ const userSchema = new mongoose.Schema({
   profileImg: {
     public_id: {
       type: String,
-      // required: true,
-      default: "1",
     },
     url: {
       type: String,
-      default: "this is dummy url",
-      // required: true,
     },
   },
   document: {
     public_id: {
       type: String,
-      // required: true,
-      default: 1,
     },
     url: {
       type: String,
-      // required: true,
-      default: "this is dummy url",
     },
   },
   role: {
