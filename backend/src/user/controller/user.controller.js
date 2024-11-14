@@ -17,7 +17,7 @@ export const createNewUser = async (req, res, next) => {
   const { name, email, password } = req.body;
   try {
     const newUser = await createNewUserRepo(req.body);
-    await sendToken(newUser, res, 200);
+    await sendToken(newUser, res, 201);
     await sendWelcomeEmail(newUser);
     // if (newUser) {
     //   await sendToken(newUser, res, 200);
